@@ -1,5 +1,7 @@
 package com.sdp.FeedBackManagement.controller;
 
+import com.sdp.FeedBackManagement.dto.PasswordResetRequest;
+import com.sdp.FeedBackManagement.exception.UserNotFoundException;
 import com.sdp.FeedBackManagement.model.User;
 import com.sdp.FeedBackManagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,5 +55,27 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    @PostMapping("/forgot-password/{mail}")
+    public ResponseEntity<String> forgotPassword(@PathVariable String mail) {
+        try {
+            service.sendPasswordResetEmail(mail);
+            return ResponseEntity.ok("Password reset email sent successfully");
+        } catch (UserNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) { // Handle other potential exceptions
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error sending reset link");
+        }
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<String> resetPassword(@RequestBody PasswordResetRequest request) {
+        User user = service.getUserByResetToken(request.getToken());
+        if (user == null || user.getResetTokenExpiry().isBefore(LocalDateTime.now())) {
+            return ResponseEntity.badRequest().body("Invalid or expired token");
+        }
+
+        service.resetPassword(user, request.getNewPassword());
+        return ResponseEntity.ok("Password reset successfully");
+    }
 }
 

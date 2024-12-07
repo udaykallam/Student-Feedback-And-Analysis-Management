@@ -48,6 +48,7 @@ public class FacultyService {
         User user = new User();
         user.setUsername(faculty.getFacultyId());
         user.setPassword(encoder.encode("klu@123456"));
+        user.setMail(faculty.getMail());
         user.setRole("Faculty");
 
         User savedUser = userRepository.save(user);
@@ -80,6 +81,7 @@ public class FacultyService {
 
                 User user = new User();
                 user.setUsername(faculty.getFacultyId());
+                user.setMail(faculty.getMail());
                 user.setPassword(encoder.encode("klu@123456"));
                 user.setRole("Faculty");
                 userRepository.save(user);

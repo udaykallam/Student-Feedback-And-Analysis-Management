@@ -43,6 +43,7 @@ public class StudentService {
         User user = new User();
         user.setUsername(student.getUniversityId());
         user.setPassword(encoder.encode(student.getDateOfBirth()));
+        user.setMail(student.getMail());
         user.setRole("Student");
 
         User savedUser = userRepository.save(user);

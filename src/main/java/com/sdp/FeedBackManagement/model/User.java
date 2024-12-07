@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Setter
 @Getter
@@ -27,6 +29,9 @@ public class User {
     private String password;
 
     @Column(nullable = false)
+    private String mail;
+
+    @Column(nullable = false)
     private String role;
 
     @JsonManagedReference(value = "student-ref")
@@ -36,4 +41,7 @@ public class User {
     @JsonManagedReference(value = "faculty-ref")
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Faculty faculty;
+
+    private String resetToken;
+    private LocalDateTime resetTokenExpiry;
 }
