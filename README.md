@@ -29,7 +29,7 @@ Before setting up the project, make sure you have the following installed:
 Clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/your-username/student-feedback-analysis.git
+git clone https://github.com/udaykallam/Student-Feedback-And-Analysis-Management.git
 cd student-feedback-analysis
 ```
 
