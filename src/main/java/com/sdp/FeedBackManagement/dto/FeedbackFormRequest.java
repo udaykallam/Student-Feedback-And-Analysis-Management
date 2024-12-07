@@ -13,8 +13,6 @@ public class FeedbackFormRequest {
     private String title;
     private List<Question> questions; // Change from List<String> to List<Question>
 
-    // Getters and setters
-
     public static class Question {
         private String text;
         private List<String> options;

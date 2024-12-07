@@ -80,10 +80,7 @@ public class UserService {
         user.setResetTokenExpiry(LocalDateTime.now().plusHours(24)); // Token expires in 24 hours
         repo.save(user);
 
-        // Send email with reset link
         String resetLink = "http://localhost:5173/reset-password?token=" + resetToken;
-        // Use your preferred email service to send the email
-        // Example using JavaMailSender:
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(mail);
         message.setSubject("Password Reset Link");
@@ -92,7 +89,6 @@ public class UserService {
     }
 
     private String generateResetToken() {
-        // Generate a random token using a secure random number generator
         SecureRandom random = new SecureRandom();
         byte[] bytes = new byte[32];
         random.nextBytes(bytes);

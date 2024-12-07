@@ -7,13 +7,13 @@ import java.util.List;
 public class FeedbackForm {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generate IDs
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String formName;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "feedback_form_id") // Foreign key in the Question table
+    @JoinColumn(name = "feedback_form_id")
     private List<Question> questions;
 
     // Getters and setters
@@ -41,5 +41,4 @@ public class FeedbackForm {
         this.questions = questions;
     }
 
-    // Optionally, override toString, equals, and hashCode
 }

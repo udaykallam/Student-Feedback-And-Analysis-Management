@@ -64,9 +64,8 @@ public class CourseService {
         Faculty faculty = facultyRepository.findById(facultyId)
                 .orElseThrow(() -> new RuntimeException("Faculty not found"));
 
-        // Link student with the course and selected faculty
         course.getRegisteredStudents().add(student);
-        course.setSelectedFaculty(faculty); // Now it works because 'selectedFaculty' exists in the Course entity
+        course.setSelectedFaculty(faculty);
         courseRepository.save(course);
 
         return "Successfully registered for course!";
@@ -79,11 +78,8 @@ public class CourseService {
     }
 
     public List<Course> getCoursesByStudentId(Long studentId) {
-        // Find the student by ID
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new IllegalArgumentException("Student not found with id: " + studentId));
-
-        // Return the courses the student is registered for
         return student.getRegisteredCourses();
     }
 
@@ -108,7 +104,7 @@ public class CourseService {
     }
 
     public List<Student> getStudentsByCourseAndFaculty(Long courseId, Long facultyId) {
-        return studentRepository.findAll(); // Placeholder for custom query
+        return studentRepository.findAll();
     }
 
     public Course getCourseById(Long courseId) {

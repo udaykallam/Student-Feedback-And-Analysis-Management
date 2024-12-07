@@ -23,6 +23,4 @@ public class FeedbackQuestion {
 
     @OneToMany(mappedBy = "question")
     private List<FeedbackOption> options;
-
-    // ... other fields as needed
 }

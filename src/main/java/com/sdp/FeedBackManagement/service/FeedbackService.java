@@ -24,16 +24,12 @@ public class FeedbackService {
     private FeedbackRepository feedbackRepository;
 
     public FeedbackForm createFeedbackForm(FeedbackForm feedbackForm) {
-        // Validate form name
         if (feedbackForm.getFormName() == null || feedbackForm.getFormName().isEmpty()) {
             throw new IllegalArgumentException("Form name cannot be empty");
         }
-
-        // Validate questions
         if (feedbackForm.getQuestions() == null || feedbackForm.getQuestions().isEmpty()) {
             throw new IllegalArgumentException("At least one question is required");
         }
-
         for (Question question : feedbackForm.getQuestions()) {
             if (question.getQuestionText() == null || question.getQuestionText().isEmpty()) {
                 throw new IllegalArgumentException("Question text cannot be empty");
@@ -42,11 +38,7 @@ public class FeedbackService {
                 throw new IllegalArgumentException("Options cannot be empty if provided");
             }
         }
-
-        // Save the feedback form (this is just an example; you'd likely persist to a database)
         feedbackFormRepository.save(feedbackForm);
-
-        // Return the saved feedback form (or any other object as needed)
         return feedbackForm;
     }
 

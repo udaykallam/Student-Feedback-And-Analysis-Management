@@ -15,6 +15,4 @@ public class StudentCourseMapping {
     @ManyToOne
     @JoinColumn(name = "course_id")
     private Course selectedCourse;
-
-    // ... other fields as needed
 }

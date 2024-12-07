@@ -18,7 +18,6 @@ public class FeedbackResponse {
     private Long feedbackFormId;
 
     @ElementCollection
-    private Map<String, String> responses; // Question -> Answer
+    private Map<String, String> responses;
 
-    // Getters and Setters
 }

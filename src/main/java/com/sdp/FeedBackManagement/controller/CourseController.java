@@ -24,15 +24,15 @@ public class CourseController {
 
     @GetMapping("/all")
     public List<CourseDTO> getAllCourses() {
-        List<Course> courses = courseService.getAllCourses();  // Get all courses from the service layer
+        List<Course> courses = courseService.getAllCourses();
         return courses.stream()
-                .map(course -> modelMapper.map(course, CourseDTO.class))  // Map each course entity to CourseDTO
+                .map(course -> modelMapper.map(course, CourseDTO.class))
                 .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
     public Course getCourse(@PathVariable Long id) {
-        return courseService.getCourseById(id);  // Make sure this method returns a Course
+        return courseService.getCourseById(id);
     }
 
     @PostMapping("/{courseId}/assign-faculty/{facultyId}")

@@ -14,5 +14,5 @@ public class CourseDTO {
     private String courseName;
     private String courseCode;
     private int yearOfOffering;
-    private FacultyDTO selectedFaculty; // This field is singular
+    private FacultyDTO selectedFaculty;
 }

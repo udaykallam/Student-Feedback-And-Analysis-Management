@@ -20,6 +20,4 @@ public class FeedbackFormService {
     public List<FeedbackForm> getAllFeedbackForms() {
         return feedbackFormRepository.findAll();
     }
-
-    // ... other methods for retrieving, updating, and deleting feedback forms
 }

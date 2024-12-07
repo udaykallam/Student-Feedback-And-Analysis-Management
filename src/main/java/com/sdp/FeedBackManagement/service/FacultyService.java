@@ -111,13 +111,10 @@ public class FacultyService {
 
 
     public List<StudentDTO> getStudentsForFacultyAndCourse(Long facultyId, Long courseId) {
-        // Fetch students for the specific faculty and course
         List<Student> students = studentRepository.findByRegisteredCourses_IdAndRegisteredCourses_SelectedFaculty_Id(courseId, facultyId);
-
-        // Map each Student object to a StudentDTO
         return students.stream()
-                .filter(student -> student != null) // Avoid any null entries
-                .map(StudentDTO::new) // Use the StudentDTO constructor to map
+                .filter(student -> student != null)
+                .map(StudentDTO::new)
                 .collect(Collectors.toList());
     }
 

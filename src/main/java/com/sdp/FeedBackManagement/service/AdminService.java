@@ -3,6 +3,7 @@ package com.sdp.FeedBackManagement.service;
 import com.sdp.FeedBackManagement.model.Course;
 import com.sdp.FeedBackManagement.model.Faculty;
 import com.sdp.FeedBackManagement.model.Student;
+import com.sdp.FeedBackManagement.model.User;
 import com.sdp.FeedBackManagement.repository.FacultyRepository;
 import com.sdp.FeedBackManagement.repository.StudentRepository;
 
@@ -26,21 +27,21 @@ public class AdminService {
     @Autowired
     private UserRepository userRepository;
 
-    // Get all students
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
     }
 
-    // Get all faculty
     public List<Faculty> getAllFaculties() {
         return facultyRepository.findAll();
     }
 
-    // Update student
     public Student updateStudent(Long id, Student updatedStudent) {
         Optional<Student> student = studentRepository.findById(id);
+        Optional<User> user = userRepository.findById(id);
         if (student.isPresent()) {
             Student existingStudent = student.get();
+            User existingUser=user.get();
+            existingUser.setMail(updatedStudent.getMail());
             existingStudent.setName(updatedStudent.getName());
             existingStudent.setMail(updatedStudent.getMail());
             existingStudent.setMobileNumber(updatedStudent.getMobileNumber());
@@ -51,7 +52,6 @@ public class AdminService {
         return null;
     }
 
-    // Update faculty
     public Faculty updateFaculty(Long id, Faculty updatedFaculty) {
         Optional<Faculty> faculty = facultyRepository.findById(id);
         if (faculty.isPresent()) {
@@ -75,7 +75,6 @@ public class AdminService {
         userRepository.deleteById(id);
     }
 
-    // Delete faculty with proper handling
     @Transactional
     public void deleteFaculty(Long id) {
         if (!facultyRepository.existsById(id)) {

@@ -26,6 +26,4 @@ public class FeedbackFormController {
         List<FeedbackForm> feedbackForms = feedbackFormService.getAllFeedbackForms();
         return ResponseEntity.ok(feedbackForms);
     }
-
-    // ... other endpoints for retrieving, updating, and deleting feedback forms
 }
