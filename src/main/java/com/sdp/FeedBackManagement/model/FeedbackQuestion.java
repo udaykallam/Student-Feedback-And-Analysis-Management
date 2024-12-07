@@ -6,19 +6,23 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Entity
 @Setter
 @Getter
+@Entity
 public class FeedbackQuestion {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "feedback_form_id")
+    private FeedbackForm feedbackForm;
+
+    @Column(nullable = false)
     private String questionText;
 
-    @ElementCollection
-    private List<String> options;
+    @OneToMany(mappedBy = "question")
+    private List<FeedbackOption> options;
 
-    // Getters and Setters
+    // ... other fields as needed
 }

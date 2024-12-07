@@ -1,30 +1,45 @@
 package com.sdp.FeedBackManagement.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
 public class FeedbackForm {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generate IDs
     private Long id;
 
-    private Long courseId;
-//    private Long facultyId;
-    private String title;
-
-    private LocalDateTime expirationDate;
+    private String formName;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "feedback_form_id")
-    private List<FeedbackQuestion> questions;
+    @JoinColumn(name = "feedback_form_id") // Foreign key in the Question table
+    private List<Question> questions;
 
-    // Getters and Setters
+    // Getters and setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFormName() {
+        return formName;
+    }
+
+    public void setFormName(String formName) {
+        this.formName = formName;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
+
+    // Optionally, override toString, equals, and hashCode
 }

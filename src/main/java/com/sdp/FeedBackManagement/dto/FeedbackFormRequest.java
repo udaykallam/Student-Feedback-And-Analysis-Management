@@ -10,9 +10,30 @@ import java.util.List;
 @Getter
 @Setter
 public class FeedbackFormRequest {
-    private Long courseId;
-//    private Long facultyId;
     private String title;
-    private LocalDateTime expirationDate;
-    private List<FeedbackQuestion> questions;
+    private List<Question> questions; // Change from List<String> to List<Question>
+
+    // Getters and setters
+
+    public static class Question {
+        private String text;
+        private List<String> options;
+
+        // Getters and setters
+        public String getText() {
+            return text;
+        }
+
+        public void setText(String text) {
+            this.text = text;
+        }
+
+        public List<String> getOptions() {
+            return options;
+        }
+
+        public void setOptions(List<String> options) {
+            this.options = options;
+        }
+    }
 }

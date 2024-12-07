@@ -5,20 +5,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Map;
-
+@Entity
 @Setter
 @Getter
-@Entity
-public class FeedbackResponse {
+@NoArgsConstructor
+public class FeedbackOption {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long feedbackFormId;
+    @Column(nullable = false)
+    private String optionText;
 
-    @ElementCollection
-    private Map<String, String> responses; // Question -> Answer
-
-    // Getters and Setters
+    @ManyToOne
+    @JoinColumn(name = "feedback_question_id")
+    private FeedbackQuestion question;
 }

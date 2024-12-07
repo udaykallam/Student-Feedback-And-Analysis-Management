@@ -6,24 +6,20 @@ import com.sdp.FeedBackManagement.repository.FeedbackFormRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class FeedbackFormService {
-
     @Autowired
     private FeedbackFormRepository feedbackFormRepository;
 
-    public FeedbackForm createFeedbackForm(FeedbackFormRequest request) {
-        FeedbackForm feedbackForm = new FeedbackForm();
-        feedbackForm.setCourseId(request.getCourseId());
-//        feedbackForm.setFacultyId(request.getFacultyId());
-        feedbackForm.setTitle(request.getTitle());
-        feedbackForm.setExpirationDate(request.getExpirationDate());
-        feedbackForm.setQuestions(request.getQuestions());
+    public FeedbackForm createFeedbackForm(FeedbackForm feedbackForm) {
         return feedbackFormRepository.save(feedbackForm);
     }
 
-    public FeedbackForm getFeedbackFormById(Long id) {
-        return feedbackFormRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Feedback form not found with id: " + id));
+    public List<FeedbackForm> getAllFeedbackForms() {
+        return feedbackFormRepository.findAll();
     }
+
+    // ... other methods for retrieving, updating, and deleting feedback forms
 }

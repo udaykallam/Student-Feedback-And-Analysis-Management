@@ -48,6 +48,9 @@ public class Course {
 
     @ManyToOne
     @JoinColumn(name = "selected_faculty_id")
-    private Faculty selectedFaculty; // Add this line to represent the selected faculty for the course
+    private Faculty selectedFaculty;
+
+    @OneToMany(mappedBy = "selectedCourse")
+    private List<StudentCourseMapping> studentCourseMappings;
 
 }
